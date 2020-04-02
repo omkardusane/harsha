@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    
+
     <div id="app">
         <v-app>
             <v-content>
@@ -30,7 +30,7 @@
                     <v-card shaped elevation="12" class="mx-auto mt-10" style="width: 90%;">
                         <v-img class="white--text align-end" height="200px"
                             src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
-                            <v-card-title>तुमच्यासाठी एक छोटंसं  गिफ्ट आहे </v-card-title>
+                            <v-card-title>तुमच्यासाठी एक छोटंसं गिफ्ट आहे </v-card-title>
                         </v-img>
 
                         <v-card-subtitle class="display-1"></v-card-subtitle>
@@ -47,7 +47,10 @@
                                     {{ptext}} मला &nbsp; &nbsp;
                                 </div>
                                 <br />
-                                <v-select style="width:25%" v-if="p" v-model='r' :items="rlist" @change="onchange">
+                                <v-select 
+                                :label="p=='h'?'ती तुम्हाला काय म्हणते?':'तो तुम्हाला काय म्हणतो?'" 
+                                style="width:25%" v-if="p" v-model='r'
+                                    :items="rlist" @change="onchange">
                                 </v-select>
                                 &nbsp;&nbsp;
                                 <div v-if="r">
@@ -58,37 +61,30 @@
 
                             <v-row style="font-size:24px">
 
-                                
+
 
                                 <v-row v-if="babyRelation" justify="center">
-                                    <v-btn
-                                      color="primary"
-                                      dark
-                                      @click.stop="dialog = true"
-                                    >
-                                      Open Gift
+                                    <v-btn color="primary" dark @click.stop="dialog = true">
+                                        Open Gift
                                     </v-btn>
-                                
-                                    <v-dialog
-                                      v-model="dialog"                                      
-                                      style="width:60%"
-                                    >
-                                      <v-card>
-                                        <v-card-title class="headline">अभिनंदन</v-card-title>
-                                
-                                        <v-card-text>
-                                            <div style="font-size:24px" v-if="babyRelation">
-                                                आपण लवकर च भेटूया,&nbsp;
-                                                <span style="font-weight:bold;">
-                                                    {{babyRelation}} &nbsp;!
-                                                </span>
-                                            </div>
 
-                                        </v-card-text>
-                                
-                                      </v-card>
+                                    <v-dialog v-model="dialog" style="width:60%">
+                                        <v-card>
+                                            <v-card-title class="headline">अभिनंदन</v-card-title>
+
+                                            <v-card-text>
+                                                <div style="font-size:24px" v-if="babyRelation">
+                                                    आपण लवकर च भेटूया,&nbsp;
+                                                    <span style="font-weight:bold;">
+                                                        {{babyRelation}} &nbsp;!
+                                                    </span>
+                                                </div>
+
+                                            </v-card-text>
+
+                                        </v-card>
                                     </v-dialog>
-                                  </v-row>
+                                </v-row>
 
                             </v-row>
 
@@ -125,7 +121,7 @@
             },
             data: () => ({
                 a: 99,
-                dialog:'',
+                dialog: '',
                 p: false,
                 r: false,
                 babyRelation: false,
