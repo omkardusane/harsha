@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>Little Gift for you</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.2'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js" type='script/javascript'></script> -->
+    <!--    <v-app>
+                    </v-app>
+                 -->
+
+
+</head>
+
+<body>
+
+    <div id="root">
+
+
+
+
+    </div>
+
+    <div id="app">
+        <v-app>
+            <v-content>
+                <v-container>
+
+                    <!-- font-size:24px important! -->
+
+                    <v-card shaped elevation="12" class="mx-auto mt-10" style="width: 75%;font-size:20px !important">
+                        <v-img class="white--text align-end" height="200px"
+                            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
+                            <v-card-title>तुमच्यासाठी एक छोटंसं  गिफ्ट आहे </v-card-title>
+                        </v-img>
+
+                        <v-card-subtitle class="display-1"></v-card-subtitle>
+
+                        <v-card-text class="pa-5 text--primary">
+
+                            <v-row align="center">
+                                <v-select style="width:25%" v-model='p' :items="list" @change="onchangeP"
+                                    label="तुम्ही कोणाला चांगले ओळखता?"></v-select>
+
+                            </v-row>
+                            <v-row align="center" style="font-size:24px">
+                                <div v-if="p">
+                                    {{ptext}} मला &nbsp; &nbsp;
+                                </div>
+                                <br />
+                                <v-select style="width:25%" v-if="p" v-model='r' :items="rlist" @change="onchange">
+                                </v-select>
+                                &nbsp;&nbsp;
+                                <div v-if="r">
+                                    {{p=='h'?'म्हणते':'म्हणतो'}}
+                                </div>
+
+                            </v-row>
+
+                            <v-row style="font-size:24px">
+
+                                
+
+                                <v-row v-if="babyRelation" justify="center">
+                                    <v-btn
+                                      color="primary"
+                                      dark
+                                      @click.stop="dialog = true"
+                                    >
+                                      Open Gift
+                                    </v-btn>
+                                
+                                    <v-dialog
+                                      v-model="dialog"                                      
+                                      style="width:60%"
+                                    >
+                                      <v-card>
+                                        <v-card-title class="headline">अभिनंदन</v-card-title>
+                                
+                                        <v-card-text>
+                                            <div style="font-size:24px" v-if="babyRelation">
+                                                आपण लवकर च भेटूया,&nbsp;
+                                                <span style="fint-weight:bold;">
+                                                    {{babyRelation}} &nbsp;!
+                                                </span>
+                                            </div>
+
+                                        </v-card-text>
+                                
+                                      </v-card>
+                                    </v-dialog>
+                                  </v-row>
+
+                            </v-row>
+
+                        </v-card-text>
+
+                        <v-card-actions>
+                            <!-- <v-btn color="orange" text @click="show=">
+                                Explore
+                            </v-btn> -->
+                        </v-card-actions>
+                    </v-card>
+
+                </v-container>
+            </v-content>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+            computed: {
+                ptext() {
+                    return this.list.find(e => e.value == this.p).text
+                },
+                rlist() {
+                    return Object.keys(this.rl)
+                }
+            },
+            data: () => ({
+                a: 99,
+                dialog:'',
+                p: false,
+                r: false,
+                babyRelation: false,
+                list: [
+                    { value: 'h', text: "हर्षा" },
+                    { value: 's', text: "सागर" }
+                ],
+
+
+
+                rl: {
+                    "आई": {
+                        e: "आज्जी"
+                    },
+                    "पप्पा": {
+                        e: "आजोबा"
+                    },
+
+                    "भाऊ": {
+                        h: "मामा", s: "काका"
+                    },
+                    "बहीण": {
+                        h: "मावशी", s: "आत्या"
+                    },
+
+                    "वाहिनी": {
+                        h: "मामी", s: "काकी"
+                    },
+                    "जीजू": {
+                        h: "काका", s: "मामा"
+                    },
+
+
+                    "काकू": {
+                        e: "Cute आज्जी"
+                    },
+                    "मामी": {
+                        e: "गोड आज्जी"
+                    },
+                    "आत्या": {
+                        e: "मस्त आज्जी"
+                    },
+                    "मावशी": {
+                        e: "Fun आज्जी"
+                    },
+
+                    "आज्जी": {
+                        e: "पणजी आज्जी !"
+                    },
+                    "आजोबा": {
+                        e: "पणजोबा !"
+                    },
+
+                    "मामा": {
+                        e: "लाडके आजोबा"
+                    },
+                    "काका": {
+                        e: "आवडते आजोबा"
+                    },
+
+
+                    "भाच्चा": {
+                        e: "दादा"
+                    },
+                    "भाच्ची": {
+                        e: "ताई"
+                    },
+
+                    "पुतणी": {
+                        e: "ताई"
+                    },
+                    "पुतण्या": {
+                        e: "दादा"
+                    },
+
+                    "मित्र": {
+                        h: "Cool मामा!!", s: "Awesome काका!!"
+                    },
+                    "मैत्रीण": {
+                        h: "Awesome माऊ!!", s: "Cool आत्तू!!"
+                    },
+
+                },
+
+            }),
+            methods: {
+                onchange(val) {
+                    if (!val) {
+                        this.babyRelation = false;
+                        return;
+                    }
+                    let x = this.rl[val];
+                    this.babyRelation = x.e ? x.e : x[this.p];
+                },
+                onchangeP() {
+                    this.r = false;
+                    this.babyRelation = false;
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
