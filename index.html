@@ -38,6 +38,10 @@
                         <v-card-text class="pa-5 text--primary">
 
                             <v-row align="center">
+                                <v-text-field style="width:25%" v-model='m' solo label="तुमचं नाव?"></v-text-field>
+
+                            </v-row>
+                            <v-row align="center">
                                 <v-select style="width:25%" v-model='p' :items="list" @change="onchangeP"
                                     label="तुम्ही कोणाला चांगले ओळखता?"></v-select>
 
@@ -47,10 +51,8 @@
                                     {{ptext}} मला &nbsp; &nbsp;
                                 </div>
                                 <br />
-                                <v-select 
-                                :label="p=='h'?'काय म्हणते?':'काय म्हणतो?'" 
-                                style="width:25%" v-if="p" v-model='r'
-                                    :items="rlist" @change="onchange">
+                                <v-select :label="p=='h'?'काय म्हणते?':'काय म्हणतो?'" style="width:25%" v-if="p"
+                                    v-model='r' :items="rlist" @change="onchange">
                                 </v-select>
                                 &nbsp;&nbsp;
                                 <div v-if="r">
@@ -73,12 +75,15 @@
                                             <v-card-title class="headline">अभिनंदन</v-card-title>
 
                                             <v-card-text>
-                                                <div style="font-size:24px" v-if="babyRelation">
+                                                <div class="mb-2" style="font-size:24px" v-if="babyRelation">
                                                     आपण लवकर च भेटूया,&nbsp;
                                                     <span style="font-weight:bold;">
                                                         {{babyRelation}} &nbsp;!
                                                     </span>
                                                 </div>
+                                                <span v-if="showHint">
+                                                    Send Screenshot to Sagar & Harsha
+                                                </span>
 
                                             </v-card-text>
 
@@ -119,9 +124,19 @@
                     return Object.keys(this.rl)
                 }
             },
+            watch: {
+                dialog(val) {
+                    if (!!val)
+                        this.showHint = true;
+                    setTimeout(() => {
+                        this.showHint = false;
+                    }, 3000);
+                }
+            },
             data: () => ({
                 a: 99,
-                dialog: '',
+                dialog: false,
+                showHint: false,
                 p: false,
                 r: false,
                 babyRelation: false,
@@ -129,8 +144,6 @@
                     { value: 'h', text: "हर्षा" },
                     { value: 's', text: "सागर" }
                 ],
-
-
 
                 rl: {
                     "आई": {
@@ -219,6 +232,8 @@
                 onchangeP() {
                     this.r = false;
                     this.babyRelation = false;
+
+
                 }
             }
         })
